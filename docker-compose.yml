@@ -1,0 +1,17 @@
+version: '2'
+services:
+  deeplearning-ml:
+    build: .
+    volumes:
+      - ./jupyter:/app/jupyter
+      - ./deeplearning_ml:/app/deeplearning_ml
+    ports:
+      - "8888:8888"  # Jupyter
+    stdin_open: true     # <– keep stdin open
+    tty: true            # <– allocate a TTY
+    command: bash        # <– now bash will stay running
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: ["gpu"]
